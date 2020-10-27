@@ -6,13 +6,15 @@ Author: Luke Smith
 License: BSD 3-Clause
 Description: Script for automatic enrollment in ASVZ classes on Schalter page
 """
-# Heavily based on the bot by jstiefel https://github.com/jstiefel/asvz_bot
-# Credited here
 """
-Created on: Mar 20, 2019
-Author: Julian Stiefel
-License: BSD 3-Clause
-Description: Script for automatic enrollment in ASVZ classes
+A little change of the bot by jstiefel https://github.com/jstiefel/asvz_bot
+The change was to avoid the case where there are several events at the same
+time but with different levels (beginner, advanced, etc...), the original
+bot didn't identify the level.
+NOTE:
+This could also be implemented in the original bot by including an extra
+variable that identifies the level and by finding this level in the html.
+You'd have to be careful of the language.
 """
 
 ############################# Edit this: ######################################
