@@ -13,14 +13,14 @@ These instructions are for Ubuntu. It was tested on Ubuntu 16.04, Python 3.5.2 a
 
 Clone this repository:
 
-```
+```bash
 cd
 git clone https://github.com/jstiefel/asvz_bot.git
 ```
 
 Set up new virtual environment with venv:
 
-```
+```bash
 sudo pip install venv
 python3 -m venv ~/asvz_bot_python
 source asvz_bot_python/bin/activate
@@ -28,7 +28,7 @@ source asvz_bot_python/bin/activate
 
 Install Selenium and Firefox webdriver:
 
-```
+```bash
 pip install --upgrade pip
 pip install selenium geckodriver-autoinstaller
 deactivate
@@ -36,7 +36,7 @@ deactivate
 
 or
 
-```
+```bash
 pip install --upgrade pip
 pip install selenium
 cd Downloads
@@ -61,10 +61,9 @@ There are two methods to use this script:
 
 Run script once for single enrollment at defined time on the day before enrollment start. Don't close the terminal.
 
-```
-cd 
-source asvz_bot_python/bin/activate
-cd asvz_bot
+```bash
+source ~/asvz_bot_python/bin/activate
+cd *path*/asvz_bot
 python asvz_bot.py
 ```
 
@@ -72,13 +71,13 @@ python asvz_bot.py
 
 Copy asvz_bot.py for each enrollment you want to make in one week. Then define a cron job for each of these with corresponding time.
 
-```
+```bash
 crontab -e
 ```
 
 To run enrollment for example at 21:30 each Tuesday, enter:
 
-```
+```bash
 30 21 * * 2 python asvz_bot.py
 # Shell variable for cron
 SHELL=/bin/bash

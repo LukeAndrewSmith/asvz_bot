@@ -10,14 +10,12 @@ Description: Script for automatic enrollment in ASVZ classes
 ############################# Edit this: ######################################
 
 # ETH credentials:
-username = 'xxxx'
-password = 'xxxx'
-day = 'Donnerstag'
-facility = 'Sport Center Polyterrasse'
-lesson_time = '19:30'
-enrollment_time_difference = 22 # how many hours before registration starts
-# link to particular sport on ASVZ Sportfahrplan, e.g. cycling class:
-sportfahrplan_particular = 'https://asvz.ch/426-sportfahrplan?f[0]=sport:45627'
+username = 'xxx'
+password = 'xxx'
+lesson_time = '19:15'
+enrollment_time_difference = 24 # how many hours before registration starts
+# link directly to enrollment
+schalter_page = 'https://schalter.asvz.ch/tn/lessons/141573'
 
 ###############################################################################
 
@@ -42,7 +40,7 @@ def waiting_fct():
         currentTime = datetime.today()
 
     if currentTime.hour == enrollmentTime.hour:
-        while currentTime.minute < enrollmentTime.minute:
+        while currentTime.minute < enrollmentTime.minute-1:
             print("Wait for enrollment to open")
             time.sleep(30)
             currentTime = datetime.today()
@@ -57,20 +55,8 @@ def asvz_enroll():
     driver = webdriver.Firefox(options = options)
 
     try:
-        driver.get(sportfahrplan_particular)
+        driver.get(schalter_page)
         driver.implicitly_wait(20) # wait 20 seconds if not defined differently
-        print("Headless Firefox Initialized")
-        # find corresponding day div:
-        day_ele = driver.find_element_by_xpath("//div[@class='teaser-list-calendar__day'][contains(., '" + day + "')]")
-        # search in day div after corresponding location and time
-        day_ele.find_element_by_xpath(".//li[@class='btn-hover-parent'][contains(., '" + facility + "')][contains(., '" + lesson_time + "')]").click()
-
-        WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.XPATH, "//a[@class='btn btn--block btn--icon relative btn--primary-border' or @class='btn btn--block btn--icon relative btn--primary']"))).click()
-
-        # switch to new window:
-        time.sleep(2) # necessary because tab needs to be open to get window handles
-        tabs = driver.window_handles
-        driver.switch_to.window(tabs[1])
         WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.XPATH, "//button[@class='btn btn-default ng-star-inserted' and @title='Login']"))).click()
         WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.XPATH, "//button[@class='btn btn-warning btn-block' and @title='SwitchAai Account Login']"))).click()
 
