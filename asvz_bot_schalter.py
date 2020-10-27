@@ -1,6 +1,14 @@
 #!/user/bin/env python
 
 """
+Created on: Oct 27, 2020
+Author: Luke Smith
+License: BSD 3-Clause
+Description: Script for automatic enrollment in ASVZ classes on Schalter page
+"""
+# Heavily based on the bot by jstiefel https://github.com/jstiefel/asvz_bot
+# Credited here
+"""
 Created on: Mar 20, 2019
 Author: Julian Stiefel
 License: BSD 3-Clause
